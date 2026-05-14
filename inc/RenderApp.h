@@ -18,10 +18,12 @@ private:
     VkDebugUtilsMessengerEXT debugMessenger;
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
     VkDevice device = VK_NULL_HANDLE;
+    VkQueue graphicsQueue;
 
     void initVulkan();
     void createInst();
     void setupDebugMessenger();
+    void createLogicalDevice();
     void mainLoop();
     void cleanup();
 
