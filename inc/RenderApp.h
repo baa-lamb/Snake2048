@@ -15,13 +15,19 @@ public:
 private:
     // ---- vulkan
     VkInstance instance;
-    VkDebugUtilsMessengerEXT debugMessenger;
+    VkSurfaceKHR surface;
+
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-    VkDevice device = VK_NULL_HANDLE;
+    VkDevice device = VK_NULL_HANDLE; // logical device
+
     VkQueue graphicsQueue;
+    VkQueue presentQueue;
+
+    VkDebugUtilsMessengerEXT debugMessenger;
 
     void initVulkan();
     void createInst();
+    void createSurface();
     void setupDebugMessenger();
     void createLogicalDevice();
     void mainLoop();

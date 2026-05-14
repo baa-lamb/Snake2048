@@ -6,7 +6,7 @@
 namespace
 {
 
-bool isDeviceSuitable(VkPhysicalDevice device)
+bool isDeviceSuitable(VkPhysicalDevice device, const VkSurfaceKHR& surface)
 {
     //VkPhysicalDeviceProperties deviceProperties;
     //VkPhysicalDeviceFeatures deviceFeatures;
@@ -15,13 +15,13 @@ bool isDeviceSuitable(VkPhysicalDevice device)
     //return deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU &&
     //    deviceFeatures.geometryShader;
 
-    QueueFamilyIndices indices = findQueueFamilies(device);
+    QueueFamilyIndices indices = findQueueFamilies(device, surface);
     return indices.isComplete();
 }
 
 }
 
-VkPhysicalDevice pickPhysicalDevice(VkInstance& instance)
+VkPhysicalDevice pickPhysicalDevice(VkInstance& instance, const VkSurfaceKHR& surface)
 {
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
     uint32_t deviceCount = 0;
@@ -35,7 +35,7 @@ VkPhysicalDevice pickPhysicalDevice(VkInstance& instance)
     vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
 
     for (const auto& device : devices) {
-        if (isDeviceSuitable(device)) {
+        if (isDeviceSuitable(device, surface)) {
             physicalDevice = device;
             break;
         }
@@ -48,7 +48,7 @@ VkPhysicalDevice pickPhysicalDevice(VkInstance& instance)
     return physicalDevice;
 }
 
-QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device)
+QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, const VkSurfaceKHR& surface)
 {
     QueueFamilyIndices indices;
 
@@ -63,6 +63,13 @@ QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device)
         // Check if this family supports graphics commands
         if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
             indices.graphicsFamily = i;
+        }
+
+        VkBool32 presentSupport = false;
+        vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
+
+        if (presentSupport) {
+            indices.presentFamily = i;
         }
 
         if (indices.isComplete()) {
