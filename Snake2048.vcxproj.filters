@@ -33,6 +33,9 @@
     <ClCompile Include="src\RenderApp.cpp">
       <Filter>Source Files\rendering</Filter>
     </ClCompile>
+    <ClCompile Include="src\SwapChain.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\DebugUtils.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files\rendering</Filter>
     </ClInclude>
     <ClInclude Include="inc\RenderApp.h">
+      <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\SwapChain.h">
       <Filter>Header Files\rendering</Filter>
     </ClInclude>
   </ItemGroup>

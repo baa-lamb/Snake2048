@@ -2,9 +2,27 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <set>
 
 namespace
 {
+
+bool checkDeviceExtensionSupport(VkPhysicalDevice device) {
+    uint32_t extensionCount;
+    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
+
+    std::vector<VkExtensionProperties> availableExtensions(extensionCount);
+    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
+
+    std::set<std::string> requiredExtensions(DeviceExtensions.begin(), DeviceExtensions.end());
+
+    for (const auto& extension : availableExtensions) {
+        requiredExtensions.erase(extension.extensionName);
+    }
+
+    return requiredExtensions.empty();
+}
 
 bool isDeviceSuitable(VkPhysicalDevice device, const VkSurfaceKHR& surface)
 {
@@ -16,7 +34,9 @@ bool isDeviceSuitable(VkPhysicalDevice device, const VkSurfaceKHR& surface)
     //    deviceFeatures.geometryShader;
 
     QueueFamilyIndices indices = findQueueFamilies(device, surface);
-    return indices.isComplete();
+    const bool extensionsSupported = checkDeviceExtensionSupport(device);
+
+    return indices.isComplete() && extensionsSupported;
 }
 
 }

@@ -1,3 +1,5 @@
+// This file contain validation layers + debug messenger
+
 #pragma once
 
 #include <vulkan/vulkan.h>

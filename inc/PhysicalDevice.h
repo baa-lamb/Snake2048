@@ -1,7 +1,14 @@
+// This file contains GPU selection + queue families
+
 #pragma once
 
 #include <vulkan/vulkan.h>
 #include <optional>
+#include <vector>
+
+const std::vector<const char*> DeviceExtensions = {
+    VK_KHR_SWAPCHAIN_EXTENSION_NAME
+};
 
 // Holds the indices of the queue families we need
 struct QueueFamilyIndices {

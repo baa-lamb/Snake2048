@@ -1,5 +1,6 @@
 #include "RenderApp.h"
 #include "PhysicalDevice.h"
+#include "SwapChain.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -51,6 +52,17 @@ void RenderApplication::initVulkan()
 
     physicalDevice = pickPhysicalDevice(instance, surface);
     createLogicalDevice();
+
+    sch::createSwapChain(
+        device,
+        physicalDevice,
+        surface,
+        window,
+        swapChain,
+        swapChainImages,
+        swapChainImageFormat,
+        swapChainExtent
+    );
 }
 
 void RenderApplication::createInst()
@@ -144,7 +156,8 @@ void RenderApplication::createLogicalDevice()
 
     createInfo.pEnabledFeatures = &deviceFeatures;
 
-    createInfo.enabledExtensionCount = 0;
+    createInfo.enabledExtensionCount = static_cast<uint32_t>( DeviceExtensions.size() );
+    createInfo.ppEnabledExtensionNames = DeviceExtensions.data();
 
     if (enableValidationLayers) {
         createInfo.enabledLayerCount = static_cast<uint32_t>( validationLayers.size() );
@@ -172,6 +185,7 @@ void RenderApplication::mainLoop()
 // deallocate resources
 void RenderApplication::cleanup()
 {
+    sch::cleanupSwapChain(device, swapChain);
     vkDestroyDevice(device, nullptr);
 
     if (enableValidationLayers) {
