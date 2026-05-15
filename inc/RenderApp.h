@@ -25,6 +25,7 @@ private:
 
     VkSwapchainKHR swapChain;
     std::vector<VkImage> swapChainImages;
+    std::vector<VkImageView> swapChainImageViews;
     VkFormat swapChainImageFormat;
     VkExtent2D swapChainExtent;
 
@@ -35,6 +36,7 @@ private:
     void createSurface();
     void setupDebugMessenger();
     void createLogicalDevice();
+    void createImageViews();
     void mainLoop();
     void cleanup();
 
