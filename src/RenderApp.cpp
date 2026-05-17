@@ -1,6 +1,7 @@
 #include "RenderApp.h"
 #include "PhysicalDevice.h"
 #include "SwapChain.h"
+#include "Pipeline.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -62,6 +63,14 @@ void RenderApplication::initVulkan()
         swapChainImages,
         swapChainImageFormat,
         swapChainExtent
+    );
+    createImageViews();
+
+    createGraphicsPipeline(
+        device,
+        swapChainExtent,
+        graphicsPipeline,
+        pipelineLayout
     );
 }
 
@@ -201,11 +210,6 @@ void RenderApplication::createImageViews()
     }
 }
 
-void RenderApplication::createGraphicsPipeline()
-{
-
-}
-
 // start render frames until the window is closed
 void RenderApplication::mainLoop()
 {
@@ -217,6 +221,10 @@ void RenderApplication::mainLoop()
 // deallocate resources
 void RenderApplication::cleanup()
 {
+    // Pipeline
+    vkDestroyPipeline(device, graphicsPipeline, nullptr); 
+    vkDestroyPipelineLayout(device, pipelineLayout, nullptr); 
+
     // clean image views
     for (auto imageView : swapChainImageViews) {
         vkDestroyImageView(device, imageView, nullptr);

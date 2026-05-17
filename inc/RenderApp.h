@@ -29,6 +29,9 @@ private:
     VkFormat swapChainImageFormat;
     VkExtent2D swapChainExtent;
 
+    VkPipelineLayout pipelineLayout;       
+    VkPipeline graphicsPipeline;
+
     VkDebugUtilsMessengerEXT debugMessenger;
 
     void initVulkan();
@@ -37,7 +40,6 @@ private:
     void setupDebugMessenger();
     void createLogicalDevice();
     void createImageViews();
-    void createGraphicsPipeline();
     void mainLoop();
     void cleanup();
 
