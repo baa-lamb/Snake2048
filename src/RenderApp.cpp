@@ -201,6 +201,11 @@ void RenderApplication::createImageViews()
     }
 }
 
+void RenderApplication::createGraphicsPipeline()
+{
+
+}
+
 // start render frames until the window is closed
 void RenderApplication::mainLoop()
 {

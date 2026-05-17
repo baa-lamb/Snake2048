@@ -37,6 +37,7 @@ private:
     void setupDebugMessenger();
     void createLogicalDevice();
     void createImageViews();
+    void createGraphicsPipeline();
     void mainLoop();
     void cleanup();
 

@@ -22,12 +22,14 @@
     <ClCompile Include="src\DebugUtils.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\PhysicalDevice.cpp" />
+    <ClCompile Include="src\Pipline.cpp" />
     <ClCompile Include="src\RenderApp.cpp" />
     <ClCompile Include="src\SwapChain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\DebugUtils.h" />
     <ClInclude Include="inc\PhysicalDevice.h" />
+    <ClInclude Include="inc\Pipeline.h" />
     <ClInclude Include="inc\RenderApp.h" />
     <ClInclude Include="inc\SwapChain.h" />
   </ItemGroup>
