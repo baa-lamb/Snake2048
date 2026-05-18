@@ -29,6 +29,7 @@ private:
     VkFormat swapChainImageFormat;
     VkExtent2D swapChainExtent;
 
+    VkRenderPass renderPass;
     VkPipelineLayout pipelineLayout;       
     VkPipeline graphicsPipeline;
 
@@ -40,6 +41,7 @@ private:
     void setupDebugMessenger();
     void createLogicalDevice();
     void createImageViews();
+    void createRenderPass();
     void mainLoop();
     void cleanup();
 
