@@ -65,10 +65,12 @@ void RenderApplication::initVulkan()
         swapChainExtent
     );
     createImageViews();
+    createRenderPass();
 
     createGraphicsPipeline(
         device,
         swapChainExtent,
+        renderPass,
         graphicsPipeline,
         pipelineLayout
     );

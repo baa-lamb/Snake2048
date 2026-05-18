@@ -10,6 +10,7 @@ VkShaderModule createShaderModule(const std::vector<char>& code, VkDevice device
 
 void createGraphicsPipeline(
     VkDevice device,
-    VkExtent2D swapChainExtent,  
+    VkExtent2D swapChainExtent, 
+    VkRenderPass renderPass,
     VkPipeline& graphicsPipeline,
     VkPipelineLayout& pipelineLayout);
