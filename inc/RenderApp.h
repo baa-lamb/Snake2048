@@ -33,6 +33,11 @@ private:
     VkPipelineLayout pipelineLayout;       
     VkPipeline graphicsPipeline;
 
+    std::vector<VkFramebuffer> swapChainFramebuffers;
+
+    VkCommandPool commandPool;
+    VkCommandBuffer commandBuffer;
+
     VkDebugUtilsMessengerEXT debugMessenger;
 
     void initVulkan();
@@ -42,6 +47,10 @@ private:
     void createLogicalDevice();
     void createImageViews();
     void createRenderPass();
+    void createFramebuffers();
+    void createCommandPool();
+    void createCommandBuffer();
+    void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
     void mainLoop();
     void cleanup();
 
